@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:clean_arch/src/authentication/domain/usecases/create_user.dart';
-import 'package:clean_arch/src/authentication/domain/usecases/get_users.dart';
-import 'package:clean_arch/src/authentication/presentation/cubit/authentication_state.dart';
+import 'package:equatable/equatable.dart';
+import 'package:tdd_tutorial/src/authentication/domain/entities/user.dart';
+import 'package:tdd_tutorial/src/authentication/domain/usecases/create_user.dart';
+import 'package:tdd_tutorial/src/authentication/domain/usecases/get_users.dart';
+
+part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({

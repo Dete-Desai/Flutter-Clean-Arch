@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:clean_arch/core/errors/exceptions.dart';
-import 'package:clean_arch/core/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:tdd_tutorial/core/errors/exceptions.dart';
+import 'package:tdd_tutorial/core/utils/constants.dart';
+import 'package:tdd_tutorial/core/utils/typedef.dart';
+import 'package:tdd_tutorial/src/authentication/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:clean_arch/src/authentication/data/models/user_model.dart';
-
-import '../../../../core/utils/typedef.dart';
 
 abstract class AuthenticationRemoteDataSource {
   Future<void> createUser({
@@ -36,13 +36,16 @@ class AuthRemoteDataSrcImpl implements AuthenticationRemoteDataSource {
     // 2. check to make sure that it "THROWS A CUSTOM EXCEPTION" with the
     // right message when status code is the bad one
     try {
-      final response =
-          await _client.post(Uri.https(kBaseUrl, kCreateUserEndpoint),
-              body: jsonEncode({
-                'createdAt': createdAt,
-                'name': name,
-              }),
-              headers: {'Content-Type': 'application/json'});
+      final response = await _client.post(
+        Uri.https(kBaseUrl, kCreateUserEndpoint),
+        body: jsonEncode({
+          'createdAt': createdAt,
+          'name': name,
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      );
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw APIException(
           message: response.body,
